@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var moves: [Move?] = Array(repeating: nil, count: 9)
     @State private var isGameBoardDisabled = false
+    @State private var alertItem: AlertItem?
     
     var columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
@@ -22,8 +23,8 @@ struct ContentView: View {
                     ZStack {
                         Circle()
                             .foregroundStyle(.blue).opacity(0.8)
-//                                .frame(width: geometry.size.width / 3 - 8,
-//                                       height: geometry.size.height / 3 - 96)
+                        //                                .frame(width: geometry.size.width / 3 - 8,
+                        //                                       height: geometry.size.height / 3 - 96)
                         
                         Image(systemName: moves[j]?.indicator ?? "")
                             .resizable()
@@ -35,6 +36,18 @@ struct ContentView: View {
                         
                         moves[j] = .init(player: .human, boardIndex: j)
                         
+                        if checkWinCondition(for: .human, in: moves) {
+                            alertItem = AlertContext.humanWin
+                            
+                            return
+                        }
+                        
+                        if checkForDraw(in: moves) {
+                            alertItem = AlertContext.draw
+                            
+                            return
+                        }
+                        
                         isGameBoardDisabled = true
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -45,6 +58,17 @@ struct ContentView: View {
                             
                             isGameBoardDisabled = false
                             
+                            if checkWinCondition(for: .computer, in: moves) {
+                                alertItem = AlertContext.computerWin
+                                
+                                return
+                            }
+                            
+                            if checkForDraw(in: moves) {
+                                alertItem = AlertContext.draw
+                                
+                                return
+                            }
                         }
                     }
                 }
@@ -52,6 +76,13 @@ struct ContentView: View {
         }
         .disabled(isGameBoardDisabled)
         .padding()
+        .alert(item: $alertItem) { alertItem in
+            Alert(title: alertItem.title,
+                  message: alertItem.message,
+                  dismissButton: .default(alertItem.buttonTitle,
+                                          action: { resetGame() })
+            )
+        }
     }
     
     func isSquareOccupied(for moves: [Move?], atIndex index: Int) -> Bool {
@@ -80,6 +111,14 @@ struct ContentView: View {
         for pattern in winPatterns where pattern.isSubset(of: playerPositions) { return true }
         
         return false
+    }
+    
+    func checkForDraw(in moves: [Move?]) -> Bool {
+        return moves.compactMap { $0 }.count == 9
+    }
+    
+    func resetGame() {
+        moves = Array(repeating: nil, count: 9)
     }
 }
 
