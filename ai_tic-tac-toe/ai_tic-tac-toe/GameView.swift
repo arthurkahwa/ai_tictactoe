@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct GameView: View {
-    @StateObject private var viewModel = ViewModel()
+    @Bindable
+    private var viewModel = ViewModel()
     
     var body: some View {
         VStack {
@@ -31,10 +32,10 @@ struct GameView: View {
         }
         .disabled(viewModel.isGameBoardDisabled)
         .padding()
-        .alert(item: $viewModel.alertItem) { alertItem in
-            Alert(title: alertItem.title,
-                  message: alertItem.message,
-                  dismissButton: .default(alertItem.buttonTitle,
+        .alert(item: $viewModel.alertItem) { item in
+            Alert(title: item.title,
+                  message: item.message,
+                  dismissButton: .default(item.buttonTitle,
                                           action: { viewModel.resetGame() })
             )
         }

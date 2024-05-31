@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-final class ViewModel: ObservableObject {
+@Observable
+final class ViewModel {
     var columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
                                GridItem(.flexible())]
     
-    @Published var moves: [Move?] = Array(repeating: nil, count: 9)
-    @Published var isGameBoardDisabled = false
-    @Published var alertItem: AlertItem?
+    var moves: [Move?] = Array(repeating: nil, count: 9)
+    var isGameBoardDisabled = false
+    var alertItem: AlertItem?
     
     func processPlayerMove(for position: Int) {
         if isSquareOccupied(for: moves, atIndex: position) { return  }
