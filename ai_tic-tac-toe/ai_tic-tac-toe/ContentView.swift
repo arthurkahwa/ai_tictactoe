@@ -110,6 +110,21 @@ struct ContentView: View {
         }
         
         // AI tries to block move
+        let humanMoves = moves
+            .compactMap { $0 }
+            .filter {  $0.player == .human }
+        
+        let humanPosition = Set(humanMoves.map { $0.boardIndex })
+        
+        for pattern in winPatterns {
+            let winPositions = pattern.subtracting(humanPosition)
+            
+            if winPositions.count == 1 {
+                let isPositionAvailable = !isSquareOccupied(for: moves, atIndex: winPositions.first!)
+                
+                if isPositionAvailable { return winPositions.first! }
+            }
+        }
         
         // AI tries to take middle square
         
