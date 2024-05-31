@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct GameView: View {
+    @Environment(\.modelContext) private var modelContext
+    
     @Bindable
     private var viewModel = ViewModel()
     
     var body: some View {
-        VStack {
+        NavigationStack {
             Text("Scores:")
                 .font(.title2)
                 .fontWeight(.heavy)
@@ -26,7 +29,7 @@ struct GameView: View {
                     
                     Spacer()
                     
-                    Text("100")
+                    Text("\(viewModel.humanScore)")
                 }
                 
                 HStack {
@@ -35,17 +38,15 @@ struct GameView: View {
                     
                     Spacer()
                     
-                    Text("100")
+                    Text("\(viewModel.computerScore)")
                 }
             }
             .font(.title)
             .padding(.bottom, 64)
             
-            
-            Text("Message")
+            Text(viewModel.message)
                 .font(.callout)
                 .padding(.bottom, 24)
-            
             
             LazyVGrid(columns: viewModel.columns, spacing: 4) {
                 ForEach(0..<9) { position in
@@ -85,6 +86,9 @@ struct GameView: View {
                                           action: { viewModel.resetGame() })
             )
         }
+        .onAppear(perform: {
+            viewModel.modelContext = modelContext
+        })
     }
 }
 

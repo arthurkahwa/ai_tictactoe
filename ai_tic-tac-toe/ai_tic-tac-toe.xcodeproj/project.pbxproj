@@ -15,6 +15,7 @@
 		8EC7BA5C2C06616E00E1C77A /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA5B2C06616E00E1C77A /* Move.swift */; };
 		8EC7BA5E2C075DA800E1C77A /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA5D2C075DA800E1C77A /* Alerts.swift */; };
 		8EC7BA602C09E3EA00E1C77A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA5F2C09E3EA00E1C77A /* ViewModel.swift */; };
+		8EC7BA622C0A002900E1C77A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA612C0A002900E1C77A /* Score.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		8EC7BA5B2C06616E00E1C77A /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		8EC7BA5D2C075DA800E1C77A /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		8EC7BA5F2C09E3EA00E1C77A /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		8EC7BA612C0A002900E1C77A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				8EC7BA5B2C06616E00E1C77A /* Move.swift */,
 				8EC7BA5D2C075DA800E1C77A /* Alerts.swift */,
 				8EC7BA5F2C09E3EA00E1C77A /* ViewModel.swift */,
+				8EC7BA612C0A002900E1C77A /* Score.swift */,
 			);
 			path = "ai_tic-tac-toe";
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				8EC7BA5C2C06616E00E1C77A /* Move.swift in Sources */,
 				8EC7BA5E2C075DA800E1C77A /* Alerts.swift in Sources */,
 				8EC7BA4E2C06591700E1C77A /* GameView.swift in Sources */,
+				8EC7BA622C0A002900E1C77A /* Score.swift in Sources */,
 				8EC7BA4C2C06591700E1C77A /* ai_tic_tac_toeApp.swift in Sources */,
 				8EC7BA602C09E3EA00E1C77A /* ViewModel.swift in Sources */,
 				8EC7BA5A2C06612F00E1C77A /* PlayerEnum.swift in Sources */,

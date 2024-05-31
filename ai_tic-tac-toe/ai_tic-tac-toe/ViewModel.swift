@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @Observable
 final class ViewModel {
+    var modelContext: ModelContext? = nil
+    var scores: [Score] = []
+    
     var columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
                                GridItem(.flexible())]
@@ -16,6 +20,9 @@ final class ViewModel {
     var moves: [Move?] = Array(repeating: nil, count: 9)
     var isGameBoardDisabled = false
     var alertItem: AlertItem?
+    var message = ""
+    var computerScore = 0
+    var humanScore = 0
     
     func processPlayerMove(for position: Int) {
         if isSquareOccupied(for: moves, atIndex: position) { return  }
