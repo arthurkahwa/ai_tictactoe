@@ -8,23 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		8EC7BA4C2C06591700E1C77A /* ai_tic_tac_toeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA4B2C06591700E1C77A /* ai_tic_tac_toeApp.swift */; };
-		8EC7BA4E2C06591700E1C77A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA4D2C06591700E1C77A /* ContentView.swift */; };
+		8EC7BA4E2C06591700E1C77A /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA4D2C06591700E1C77A /* GameView.swift */; };
 		8EC7BA502C06591900E1C77A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7BA4F2C06591900E1C77A /* Assets.xcassets */; };
 		8EC7BA532C06591900E1C77A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7BA522C06591900E1C77A /* Preview Assets.xcassets */; };
 		8EC7BA5A2C06612F00E1C77A /* PlayerEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA592C06612F00E1C77A /* PlayerEnum.swift */; };
 		8EC7BA5C2C06616E00E1C77A /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA5B2C06616E00E1C77A /* Move.swift */; };
 		8EC7BA5E2C075DA800E1C77A /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA5D2C075DA800E1C77A /* Alerts.swift */; };
+		8EC7BA602C09E3EA00E1C77A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7BA5F2C09E3EA00E1C77A /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8EC7BA482C06591700E1C77A /* ai_tic-tac-toe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ai_tic-tac-toe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EC7BA4B2C06591700E1C77A /* ai_tic_tac_toeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ai_tic_tac_toeApp.swift; sourceTree = "<group>"; };
-		8EC7BA4D2C06591700E1C77A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8EC7BA4D2C06591700E1C77A /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		8EC7BA4F2C06591900E1C77A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EC7BA522C06591900E1C77A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8EC7BA592C06612F00E1C77A /* PlayerEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEnum.swift; sourceTree = "<group>"; };
 		8EC7BA5B2C06616E00E1C77A /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		8EC7BA5D2C075DA800E1C77A /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		8EC7BA5F2C09E3EA00E1C77A /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,12 +60,13 @@
 			isa = PBXGroup;
 			children = (
 				8EC7BA4B2C06591700E1C77A /* ai_tic_tac_toeApp.swift */,
-				8EC7BA4D2C06591700E1C77A /* ContentView.swift */,
+				8EC7BA4D2C06591700E1C77A /* GameView.swift */,
 				8EC7BA4F2C06591900E1C77A /* Assets.xcassets */,
 				8EC7BA512C06591900E1C77A /* Preview Content */,
 				8EC7BA592C06612F00E1C77A /* PlayerEnum.swift */,
 				8EC7BA5B2C06616E00E1C77A /* Move.swift */,
 				8EC7BA5D2C075DA800E1C77A /* Alerts.swift */,
+				8EC7BA5F2C09E3EA00E1C77A /* ViewModel.swift */,
 			);
 			path = "ai_tic-tac-toe";
 			sourceTree = "<group>";
@@ -148,8 +151,9 @@
 			files = (
 				8EC7BA5C2C06616E00E1C77A /* Move.swift in Sources */,
 				8EC7BA5E2C075DA800E1C77A /* Alerts.swift in Sources */,
-				8EC7BA4E2C06591700E1C77A /* ContentView.swift in Sources */,
+				8EC7BA4E2C06591700E1C77A /* GameView.swift in Sources */,
 				8EC7BA4C2C06591700E1C77A /* ai_tic_tac_toeApp.swift in Sources */,
+				8EC7BA602C09E3EA00E1C77A /* ViewModel.swift in Sources */,
 				8EC7BA5A2C06612F00E1C77A /* PlayerEnum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

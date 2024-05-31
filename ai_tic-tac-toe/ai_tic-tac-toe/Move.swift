@@ -12,6 +12,6 @@ struct Move {
     let boardIndex: Int
     
     var indicator: String {
-        return player == .human ? "xmark" : "circle"
+        return player == .human ? "figure" : "faxmachine"
     }
 }
