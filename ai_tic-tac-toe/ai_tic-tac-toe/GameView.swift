@@ -17,7 +17,7 @@ struct GameView: View {
                     ZStack {
                         Circle()
                             .foregroundStyle(.blue).opacity(0.8)
-                        
+ 
                         Image(systemName: viewModel.moves[position]?.indicator ?? "")
                             .resizable()
                             .frame(width: 48, height: 48)
