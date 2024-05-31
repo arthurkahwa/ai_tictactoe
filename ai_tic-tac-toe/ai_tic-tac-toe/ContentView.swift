@@ -127,6 +127,10 @@ struct ContentView: View {
         }
         
         // AI tries to take middle square
+        let centerSquare = 4
+        if isSquareOccupied(for: moves, atIndex: centerSquare) {
+            return centerSquare
+        }
         
         // AI takes a random position
         var movePosition: Int = .random(in: 0..<9)
