@@ -9,10 +9,16 @@ import SwiftUI
 import SwiftData
 
 struct GameView: View {
-    @Environment(\.modelContext) private var modelContext
+    @State
+//    @Bindable
+    private var viewModel: ViewModel
     
-    @Bindable
-    private var viewModel = ViewModel()
+    init(modelContext: ModelContext) {
+        let viewModel = ViewModel(modelContext: modelContext)
+        _viewModel = State(initialValue: viewModel)
+        
+        viewModel.modelContext = modelContext
+    }
     
     var body: some View {
         NavigationStack {
@@ -30,6 +36,7 @@ struct GameView: View {
                     Spacer()
                     
                     Text("\(viewModel.humanScore)")
+                        .font(.largeTitle)
                 }
                 
                 HStack {
@@ -39,6 +46,7 @@ struct GameView: View {
                     Spacer()
                     
                     Text("\(viewModel.computerScore)")
+                        .font(.largeTitle)
                 }
             }
             .font(.title)
@@ -61,7 +69,9 @@ struct GameView: View {
                             .foregroundStyle(.white)
                     }
                     .onTapGesture {
-                        viewModel.processPlayerMove(for: position)
+                        Task {
+                            await viewModel.processPlayerMove(for: position)
+                        }
                     }
                 }
             }
@@ -86,12 +96,5 @@ struct GameView: View {
                                           action: { viewModel.resetGame() })
             )
         }
-        .onAppear(perform: {
-            viewModel.modelContext = modelContext
-        })
     }
-}
-
-#Preview {
-    GameView()
 }

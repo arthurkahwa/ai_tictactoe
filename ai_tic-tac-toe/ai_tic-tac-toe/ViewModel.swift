@@ -10,7 +10,6 @@ import SwiftData
 
 @Observable
 final class ViewModel {
-    var modelContext: ModelContext? = nil
     var scores: [Score] = []
     
     var columns: [GridItem] = [GridItem(.flexible()),
@@ -24,18 +23,65 @@ final class ViewModel {
     var computerScore = 0
     var humanScore = 0
     
-    func processPlayerMove(for position: Int) {
+    var modelContext: ModelContext
+    
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+        
+        Task {
+            await updateLeaderBoard()
+        }
+    }
+    
+    @MainActor
+    private func fetchScores(for player: Player) async -> Int {
+    
+        var scoreQuery = FetchDescriptor<Score>() //predicate: #Predicate { $0.player == player })
+        scoreQuery.includePendingChanges = true
+        
+        do {
+            let results = try modelContext.fetch(scoreQuery)
+            let playerResults = results.filter { $0.player == player }
+            let scores = playerResults.reduce(0) { $0 + $1.value }
+            
+            return scores
+        }
+        catch {
+            dump(error)
+            return 0
+        }
+    }
+    
+    private func updateLeaderBoard() async {
+        humanScore = await fetchScores(for: .human)
+        computerScore = await fetchScores(for: .computer)
+    }
+    
+    @MainActor
+    private func addScore(for player: Player) async {
+        let score = Score(timestamp: .now, player: player, value: 1)
+        modelContext.insert(score)
+        
+        await updateLeaderBoard()
+    }
+    
+    func processPlayerMove(for position: Int) async {
         if isSquareOccupied(for: moves, atIndex: position) { return  }
         
         moves[position] = .init(player: .human, boardIndex: position)
         
         if checkWinCondition(for: .human, in: moves) {
+            await addScore(for: .human)
+            
             alertItem = AlertContext.humanWin
             
             return
         }
         
         if checkForDraw(in: moves) {
+            await addScore(for: .human)
+            await addScore(for: .computer)
+            
             alertItem = AlertContext.draw
             
             return
@@ -43,25 +89,33 @@ final class ViewModel {
         
         isGameBoardDisabled = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
-            let computerPosition = determineComputerMovePosition(in: moves)
-            
-            moves[computerPosition] = .init(player: .computer,
-                                            boardIndex: computerPosition)
-            
-            isGameBoardDisabled = false
-            
-            if checkWinCondition(for: .computer, in: moves) {
-                alertItem = AlertContext.computerWin
-                
-                return
+        
+        try! await Task.sleep(nanoseconds: 500_000_000)
+        
+        let computerPosition = determineComputerMovePosition(in: moves)
+        
+        moves[computerPosition] = .init(player: .computer,
+                                        boardIndex: computerPosition)
+        
+        isGameBoardDisabled = false
+        
+        if checkWinCondition(for: .computer, in: moves) {
+            Task {
+                await addScore(for: .computer)
             }
             
-            if checkForDraw(in: moves) {
-                alertItem = AlertContext.draw
-                
-                return
-            }
+            alertItem = AlertContext.computerWin
+            
+            return
+        }
+        
+        if checkForDraw(in: moves) {
+            await addScore(for: .human)
+            await addScore(for: .computer)
+            
+            alertItem = AlertContext.draw
+            
+            return
         }
     }
     
@@ -144,4 +198,3 @@ final class ViewModel {
         moves = Array(repeating: nil, count: 9)
     }
 }
-

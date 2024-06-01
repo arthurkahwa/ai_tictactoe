@@ -8,21 +8,35 @@
 import SwiftUI
 import SwiftData
 
+@Model
+class Foo {
+    var name: String
+    var birthDay: Date
+    
+    init(name: String, birthDay: Date) {
+        self.name = name
+        self.birthDay = birthDay
+    }
+}
+
 @main
 struct ai_tic_tac_toeApp: App {
+    let modelContainer: ModelContainer
     
-    let container: ModelContainer = {
-        let schema = Schema([Score.self])
-        
-        let modelContainer = try! ModelContainer(for: schema, configurations: [])
-        
-        return modelContainer
-    }()
-    
+    init() {
+        do {
+            modelContainer = try ModelContainer(for: Score.self)
+        }
+        catch {
+            print(error)
+            
+            fatalError("\(error)")
+        }
+    }
     var body: some Scene {
         WindowGroup {
-            GameView()
+            GameView(modelContext: modelContainer.mainContext)
         }
-        .modelContainer(container)
+        .modelContainer(modelContainer)
     }
 }
