@@ -10,7 +10,6 @@ import SwiftData
 
 struct GameView: View {
     @State
-//    @Bindable
     private var viewModel: ViewModel
     
     init(modelContext: ModelContext) {
