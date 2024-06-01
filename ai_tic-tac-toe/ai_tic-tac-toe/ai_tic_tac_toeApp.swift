@@ -37,6 +37,5 @@ struct ai_tic_tac_toeApp: App {
         WindowGroup {
             GameView(modelContext: modelContainer.mainContext)
         }
-        .modelContainer(modelContainer)
     }
 }
