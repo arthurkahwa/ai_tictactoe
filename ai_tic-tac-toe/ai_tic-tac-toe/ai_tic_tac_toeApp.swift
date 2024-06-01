@@ -25,7 +25,7 @@ struct ai_tic_tac_toeApp: App {
     
     init() {
         do {
-            modelContainer = try ModelContainer(for: Score.self)
+            modelContainer = try ModelContainer(for: GameScore.self)
         }
         catch {
             print(error)

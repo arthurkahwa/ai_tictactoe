@@ -15,8 +15,6 @@ struct GameView: View {
     init(modelContext: ModelContext) {
         let viewModel = ViewModel(modelContext: modelContext)
         _viewModel = State(initialValue: viewModel)
-        
-        viewModel.modelContext = modelContext
     }
     
     var body: some View {
@@ -36,6 +34,7 @@ struct GameView: View {
                     
                     Text("\(viewModel.humanScore)")
                         .font(.largeTitle)
+                        .fontWeight(.heavy)
                 }
                 
                 HStack {
@@ -46,6 +45,7 @@ struct GameView: View {
                     
                     Text("\(viewModel.computerScore)")
                         .font(.largeTitle)
+                        .fontWeight(.heavy)
                 }
             }
             .font(.title)

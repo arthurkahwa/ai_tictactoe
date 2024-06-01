@@ -36,7 +36,7 @@ final class ViewModel {
     @MainActor
     private func fetchScores(for player: Player) async -> Int {
     
-        var scoreQuery = FetchDescriptor<Score>() //predicate: #Predicate { $0.player == player })
+        var scoreQuery = FetchDescriptor<GameScore>() //predicate: #Predicate { $0.player == player })
         scoreQuery.includePendingChanges = true
         
         do {
@@ -58,8 +58,8 @@ final class ViewModel {
     }
     
     @MainActor
-    private func addScore(for player: Player) async {
-        let score = Score(timestamp: .now, player: player, value: 1)
+    private func addScore(for player: Player, isDraw draw: Bool = false) async {
+        let score = GameScore(timestamp: .now, player: player, value: 1, draw: draw)
         modelContext.insert(score)
         
         await updateLeaderBoard()
@@ -79,8 +79,8 @@ final class ViewModel {
         }
         
         if checkForDraw(in: moves) {
-            await addScore(for: .human)
-            await addScore(for: .computer)
+            await addScore(for: .human,isDraw: true)
+            await addScore(for: .computer, isDraw: true)
             
             alertItem = AlertContext.draw
             
@@ -110,8 +110,8 @@ final class ViewModel {
         }
         
         if checkForDraw(in: moves) {
-            await addScore(for: .human)
-            await addScore(for: .computer)
+            await addScore(for: .human,isDraw: true)
+            await addScore(for: .computer, isDraw: true)
             
             alertItem = AlertContext.draw
             
