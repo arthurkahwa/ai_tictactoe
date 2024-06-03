@@ -8,7 +8,11 @@ It is a game between the User and the phone, which hosts the AI.
 This app uses:
 * Swift
 * SwiftUI
-* async-await concurrency
+* * Lazy Grid View
+* * Screen Overlays
+* * SF Symbols
+* * Alerts using AlertItems
 * Swift-Data
+* async-await / concurrency
 
 ![AI Tic-Tac-Toe](images/screenshot_001.gif)
