@@ -38,7 +38,7 @@ struct GameView: View {
                 }
                 
                 HStack {
-                    Text("Computer")
+                    Text("A.I.")
                         .foregroundStyle(.secondary)
                     
                     Spacer()

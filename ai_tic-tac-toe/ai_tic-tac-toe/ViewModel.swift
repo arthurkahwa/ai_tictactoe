@@ -10,8 +10,6 @@ import SwiftData
 
 @Observable
 final class ViewModel {
-    var scores: [Score] = []
-    
     var columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
                                GridItem(.flexible())]
@@ -33,7 +31,6 @@ final class ViewModel {
         }
     }
     
-    @MainActor
     private func fetchScores(for player: Player) async -> Int {
     
         var scoreQuery = FetchDescriptor<GameScore>() //predicate: #Predicate { $0.player == player })
@@ -57,7 +54,6 @@ final class ViewModel {
         computerScore = await fetchScores(for: .computer)
     }
     
-    @MainActor
     private func addScore(for player: Player, isDraw draw: Bool = false) async {
         let score = GameScore(timestamp: .now, player: player, value: 1, draw: draw)
         modelContext.insert(score)
