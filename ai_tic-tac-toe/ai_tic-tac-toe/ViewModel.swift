@@ -20,6 +20,8 @@ final class ViewModel {
     var message = ""
     var computerScore = 0
     var humanScore = 0
+    var drawScore = 0
+    var pieChrtData: [PieChartValue] = []
     
     var modelContext: ModelContext
     
@@ -31,14 +33,15 @@ final class ViewModel {
         }
     }
     
-    private func fetchScores(for player: Player) async -> Int {
-    
-        var scoreQuery = FetchDescriptor<GameScore>() //predicate: #Predicate { $0.player == player })
+    private func fetchScores(for player: Player, isDraw: Bool = false) async -> Int {
+        var scoreQuery = FetchDescriptor<GameScore>()
         scoreQuery.includePendingChanges = true
         
         do {
             let results = try modelContext.fetch(scoreQuery)
-            let playerResults = results.filter { $0.player == player }
+            let playerResults = results
+                .filter { $0.player == player }
+                .filter { $0.draw == isDraw }
             let scores = playerResults.reduce(0) { $0 + $1.value }
             
             return scores
@@ -52,6 +55,14 @@ final class ViewModel {
     private func updateLeaderBoard() async {
         humanScore = await fetchScores(for: .human)
         computerScore = await fetchScores(for: .computer)
+        
+        drawScore = await fetchScores(for: .human, isDraw: true)
+        
+        pieChrtData = [
+            .init(playerName: Player.human.name, value: humanScore ),
+            .init(playerName: Player.computer.name, value: computerScore),
+            .init(playerName: "Draws", value: drawScore)
+        ]
     }
     
     private func addScore(for player: Player, isDraw draw: Bool = false) async {

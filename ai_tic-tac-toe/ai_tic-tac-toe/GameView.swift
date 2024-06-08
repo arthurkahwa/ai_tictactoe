@@ -12,6 +12,8 @@ struct GameView: View {
     @State
     private var viewModel: ViewModel
     
+    @State private var isShowingPieChart = false
+    
     init(modelContext: ModelContext) {
         let viewModel = ViewModel(modelContext: modelContext)
         _viewModel = State(initialValue: viewModel)
@@ -23,7 +25,6 @@ struct GameView: View {
                 .font(.title2)
                 .fontWeight(.heavy)
                 .foregroundStyle(.secondary)
-                .padding(.top, 8)
             
             VStack(alignment: .leading) {
                 HStack {
@@ -49,11 +50,9 @@ struct GameView: View {
                 }
             }
             .font(.title)
-            .padding(.bottom, 64)
             
             Text(viewModel.message)
                 .font(.callout)
-                .padding(.bottom, 24)
             
             LazyVGrid(columns: viewModel.columns, spacing: 4) {
                 ForEach(0..<9) { position in
@@ -74,7 +73,20 @@ struct GameView: View {
                     }
                 }
             }
-            .padding(.bottom, 64)
+            .padding(.bottom, 32)
+            .navigationTitle("AI Tic-Tac-Toe")
+            .sheet(isPresented: $isShowingPieChart) {
+                PieChartView(piechartValues: viewModel.pieChrtData)
+            }
+            .toolbar(content: {
+                ToolbarItem {
+                    Button(action: {
+                        isShowingPieChart = true
+                    }, label: {
+                        Image(systemName: "chart.pie.fill")
+                    })
+                }
+            })
             
             Button(action: {
                 viewModel.resetGame()

@@ -33,6 +33,7 @@ struct ai_tic_tac_toeApp: App {
             fatalError("\(error)")
         }
     }
+    
     var body: some Scene {
         WindowGroup {
             GameView(modelContext: modelContainer.mainContext)
