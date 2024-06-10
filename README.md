@@ -15,4 +15,4 @@ This app uses:
 * Swift-Data
 * async-await / concurrency
 
-![AI Tic-Tac-Toe](images/screenshot_001.gif)
+![AI Tic-Tac-Toe](images/ai-tic-tac-toe-002.gif)
