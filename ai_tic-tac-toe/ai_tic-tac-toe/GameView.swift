@@ -10,14 +10,9 @@ import SwiftData
 
 struct GameView: View {
     @State
-    private var viewModel: ViewModel
+    private var viewModel = ViewModel()
     
     @State private var isShowingPieChart = false
-    
-    init(modelContext: ModelContext) {
-        let viewModel = ViewModel(modelContext: modelContext)
-        _viewModel = State(initialValue: viewModel)
-    }
     
     var body: some View {
         NavigationStack {

@@ -21,22 +21,9 @@ class Foo {
 
 @main
 struct ai_tic_tac_toeApp: App {
-    let modelContainer: ModelContainer
-    
-    init() {
-        do {
-            modelContainer = try ModelContainer(for: GameScore.self)
-        }
-        catch {
-            print(error)
-            
-            fatalError("\(error)")
-        }
-    }
-    
     var body: some Scene {
         WindowGroup {
-            GameView(modelContext: modelContainer.mainContext)
+            GameView()
         }
     }
 }

@@ -22,23 +22,21 @@ final class ViewModel {
     var humanScore = 0
     var drawScore = 0
     var pieChrtData: [PieChartValue] = []
-    
-    var modelContext: ModelContext
-    
-    init(modelContext: ModelContext) {
-        self.modelContext = modelContext
         
+    let modelContainer = try! ModelContainer(for: GameScore.self)
+    
+    init() {
         Task {
             await updateLeaderBoard()
         }
     }
     
+    @MainActor
     private func fetchScores(for player: Player, isDraw: Bool = false) async -> Int {
-        var scoreQuery = FetchDescriptor<GameScore>()
-        scoreQuery.includePendingChanges = true
-        
         do {
-            let results = try modelContext.fetch(scoreQuery)
+            var scoreQuery = FetchDescriptor<GameScore>()
+            scoreQuery.includePendingChanges = true
+            let results = try modelContainer.mainContext.fetch(scoreQuery)
             let playerResults = results
                 .filter { $0.player == player }
                 .filter { $0.draw == isDraw }
@@ -65,9 +63,10 @@ final class ViewModel {
         ]
     }
     
+    @MainActor
     private func addScore(for player: Player, isDraw draw: Bool = false) async {
         let score = GameScore(timestamp: .now, player: player, value: 1, draw: draw)
-        modelContext.insert(score)
+        modelContainer.mainContext.insert(score)
         
         await updateLeaderBoard()
     }
