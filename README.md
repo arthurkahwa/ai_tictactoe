@@ -16,3 +16,7 @@ This app uses:
 * async-await / concurrency
 
 ![AI Tic-Tac-Toe](images/ai-tic-tac-toe-002.gif)
+
+### Sea also:
+* [Health Kit Demo](https://github.com/arthurkahwa/healthkit_showcase)
+* [Apple Watch Store](https://github.com/arthurkahwa/apple_watch_store)
