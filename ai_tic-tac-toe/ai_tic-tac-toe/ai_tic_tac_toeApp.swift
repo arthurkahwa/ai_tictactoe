@@ -6,18 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
-
-@Model
-class Foo {
-    var name: String
-    var birthDay: Date
-    
-    init(name: String, birthDay: Date) {
-        self.name = name
-        self.birthDay = birthDay
-    }
-}
 
 @main
 struct ai_tic_tac_toeApp: App {

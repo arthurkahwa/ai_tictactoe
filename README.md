@@ -11,8 +11,9 @@ This app uses:
 * * Lazy Grid View
 * * Screen Overlays
 * * SF Symbols
-* * Alerts using AlertItems
+* * Custom Alerts using AlertItems
 * Swift-Data
+* Swift charts
 * async-await / concurrency
 
 ![AI Tic-Tac-Toe](images/ai-tic-tac-toe-002.gif)
